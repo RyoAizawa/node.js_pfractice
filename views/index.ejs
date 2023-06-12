@@ -16,7 +16,37 @@
     </table>
     <!--こちらに基礎課題で言われてる内容を記述しましょう。ここから-->
     <p id="textTag"></p>
+    <small>▼基礎課題01</small>
+    <p id="practiceText"></p>
+    <small>▼基礎課題02</small>
+    <ul id="practiceArray"></ul>
+    <small>▼基礎課題03</small>
+    <ul id="practiceObj"></ul>
 
+    <script>
+        // 基礎課題1
+        let practiceText = document.getElementById("practiceText");
+        let TEXT = `<%= text %>`;
+        practiceText.innerHTML = TEXT;
+
+        // 基礎課題2
+        let practiceArray = document.getElementById("practiceArray");
+        let LIST = JSON.parse('<%= JSON.stringify(list) %>'.replace(/&#34;/g, '"'));
+        console.log(LIST);
+        LIST.forEach(element => {
+            practiceArray.insertAdjacentHTML("beforeend", `<li>${element}</li>`);
+        });
+
+        // 基礎課題3
+        let practiceObj = document.getElementById("practiceObj");
+        let USERSLIST = JSON.parse('<%= JSON.stringify(users) %>'.replace(/&#34;/g, '"'));
+        for(index in USERSLIST) {
+            console.log(index);
+            practiceObj.insertAdjacentHTML("beforeend", `<li>${USERSLIST[index].name}</li>` );
+            practiceObj.insertAdjacentHTML("beforeend", `<li>${USERSLIST[index].email}</li>` );
+        }
+
+    </script>
     <!--こちらに基礎課題で言われてる内容を記述しましょう。ここまで-->
     <script type="text/javascript">
 
