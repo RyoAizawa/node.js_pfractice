@@ -4,6 +4,11 @@ const ejs = require('ejs');
 const app = express();
 const port = 3000;
 
+// req.bodyにフォーム送信されたJSONデータを認識するために必要
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}));
 app.set('view engine', 'ejs');
 
 const mysql = require('mysql2');
@@ -60,10 +65,10 @@ app.get('/edit/:id', (req, res) => {
 });
 
 app.post('/update/:id', (req, res) => {
+  console.log(req.body);
   const sql = "UPDATE users SET ? WHERE id = " + req.params.id;
   con.query(sql,req.body, function (err, result, fields) {
     if (err) throw err;
-    console.log(result);
     res.redirect('/');
   });
 });
