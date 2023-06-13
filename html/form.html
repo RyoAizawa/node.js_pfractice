@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>入力フォーム</title>
+</head>
+<body>
+    <h1>入力フォーム</h1>
+    <form action="/" method="post">
+        <p id="nameError"></p>
+        <p>名前：<input type="text" name="name" id="name" required></p>
+        <p id="emailError"></p>
+        <p>email：<input type="text" name="email" id="email" required></p>
+        <!-- formValidation()がtrueを返さないとpostされない -->
+        <p><input type="submit" onclick="return formValidation()" value="送信"></p>
+    </form>
+
+    <script>
+        function formValidation() {
+            let name = document.getElementById("name");
+            let email = document.getElementById("email");
+            let error = false;
+            // 名前は半角英字のみ入力可
+            const nameVal = /^[a-zA-Z.]*$/;
+            // メールアドレス
+            // (半角英数で始まる)＋(半角英数と_と.は入力可)＋(@)＋(半角英数と_と.は入力可)＋(.を挟み1文字以上入力)
+            const emailVal = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/
+
+            // エラーメッセージを初期化
+            nameError.innerHTML = "";
+            emailError.innerHTML = "";
+
+            // 名前が入力されていない、または半角英字以外を入力
+            if(name.value === "" || !name.value.match(nameVal)) {
+                nameError.innerHTML = "名前を半角英字で入力してください。";
+                error = true;
+            }
+            // メールアドレスが入力されていない、またはメールアドレスの形以外を入力
+            if(email.value === "" || !email.value.match(emailVal)){
+                emailError.innerHTML = "メールアドレスを入力してください。";
+                error = true;
+            }
+            if(error) return false;
+            return true;
+        };
+
+        let nameError = document.getElementById("nameError");
+        let emailError = document.getElementById("emailError");
+        nameError.style = "color: red";
+        emailError.style = "color: red";
+    </script>
+
+</body>
+</html>

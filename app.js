@@ -5,11 +5,15 @@ const app = express();
 const port = 3000;
 
 // req.bodyにフォーム送信されたJSONデータを認識するために必要
-app.use(express.json());
-app.use(express.urlencoded({
-    extended: true
-}));
+// 実務課題03...body-parserがあれば不要
+// app.use(express.json());
+// app.use(express.urlencoded({
+//     extended: true
+// }));
+
 app.set('view engine', 'ejs');
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const mysql = require('mysql2');
 
@@ -55,6 +59,19 @@ app.get('/', (req, res) => {
     });
   });
 });
+
+app.post('/', (req, res) => {
+  const sql = "INSERT INTO users SET ?"
+  con.query(sql, req.body, function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+    res.redirect('/');
+  });
+});
+app.get('/create', (req, res) => {
+  res.sendFile(path.join(__dirname, "html/form.html"))
+});
+
 
 app.get('/edit/:id', (req, res) => {
   const sql = "SELECT * FROM users WHERE id = ?";
