@@ -46,9 +46,7 @@ app.get('/', (req, res) => {
       //例） numbar: num,
       number: num,
       text: str,
-      list: array,
-      request: req,
-      response: res
+      list: array
     });
   });
 });

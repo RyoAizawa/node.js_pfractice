@@ -39,12 +39,11 @@
 
         // 基礎課題3
         let practiceObj = document.getElementById("practiceObj");
-        let USERSLIST = JSON.parse('<%= JSON.stringify(users) %>'.replace(/&#34;/g, '"'));
-        for(index in USERSLIST) {
-            console.log(index);
-            practiceObj.insertAdjacentHTML("beforeend", `<li>${USERSLIST[index].name}</li>` );
-            practiceObj.insertAdjacentHTML("beforeend", `<li>${USERSLIST[index].email}</li>` );
-        }
+        let OBJLIST = JSON.parse('<%= JSON.stringify(users) %>'.replace(/&#34;/g, '"'));
+        OBJLIST.forEach( element => {
+            practiceObj.insertAdjacentHTML("beforeend", `<li>${element.name}</li>` );
+            practiceObj.insertAdjacentHTML("beforeend", `<li>${element.email}</li>` );
+        });
 
     </script>
     <!--こちらに基礎課題で言われてる内容を記述しましょう。ここまで-->
