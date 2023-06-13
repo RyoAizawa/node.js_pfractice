@@ -8,9 +8,9 @@
     <h1>入力フォーム</h1>
     <form action="/" method="post">
         <p id="nameError"></p>
-        <p>名前：<input type="text" name="name" id="name" required></p>
+        <p>name <input type="text" name="name" id="name" required></p>
         <p id="emailError"></p>
-        <p>email：<input type="text" name="email" id="email" required></p>
+        <p>email <input type="text" name="email" id="email" required></p>
         <!-- formValidation()がtrueを返さないとpostされない -->
         <p><input type="submit" onclick="return formValidation()" value="送信"></p>
     </form>
